@@ -1,0 +1,55 @@
+<aura:component >
+	
+    <!-- Methods -->
+    <aura:method name="callAction" action="{!c.callAction}" access="PUBLIC" description="Calls an action and handles any error." >
+        <aura:attribute name="action" type="Object" />
+        <aura:attribute name="successHandler" type="Object" />
+        <aura:attribute name="errorHandler" type="Object" />
+    </aura:method>
+    
+    <aura:method name="toggleSpinner" action="{!c.toggleSpinner}" access="PUBLIC" description="Toggles the display of the loading indicator." >
+        <aura:attribute name="isVisible" type="Boolean" />
+    </aura:method>   
+    
+    <aura:method name="populateDateInput" action="{!c.populateDateInput}" access="PUBLIC" description="Populates a date input with the correct format.">
+        <aura:attribute name="cmp" type="Component"/>
+        <aura:attribute name="inputAuraId" type="String"/>
+        <aura:attribute name="dateValue" type="Date" />
+    </aura:method>
+    
+    <aura:method name="getEntityType" action="{!c.getEntityType}" access="PUBLIC" description="Returns the entity type based on the provided entityId." >
+        <aura:attribute name="entityId" type="Id" />
+        <aura:attribute name="resultHandler" type="Object" />
+    </aura:method>    
+    
+    <aura:method name="isLead" action="{!c.isLead}" access="PUBLIC" description="Returns true if the entityId is a leadId." >
+        <aura:attribute name="entityId" type="Id" />
+        <aura:attribute name="resultHandler" type="Object" />
+    </aura:method>
+    
+    <aura:method name="isContact" action="{!c.isContact}" access="PUBLIC" description="Returns true if the entityId is a contactId." >
+        <aura:attribute name="entityId" type="Id" />
+        <aura:attribute name="resultHandler" type="Object" />
+    </aura:method>
+    
+    <aura:method name="isAccount" action="{!c.isAccount}" access="PUBLIC" description="Returns true if the entityId is a accountId." >
+        <aura:attribute name="entityId" type="Id" />
+        <aura:attribute name="resultHandler" type="Object" />
+    </aura:method>
+    
+    <aura:method name="isOpportunity" action="{!c.isOpportunity}" access="PUBLIC" description="Returns true if the entityId is a opportunityId." >
+        <aura:attribute name="entityId" type="Id" />
+        <aura:attribute name="resultHandler" type="Object" />
+    </aura:method>
+    
+    <aura:method name="initInfiniteScroll" action="{!c.initInfiniteScroll}" access="PUBLIC" description="Initializes infinite scroll on the element provided." >
+        <aura:attribute name="element" type="Object" />
+    </aura:method>
+
+    <aura:method name="findElementWithClass" action="{!c.findElementWithClass}" access="PUBLIC" description="Takes an event (i.e. click) and finds the first/parent element that contains the class specified." >
+        <aura:attribute name="triggeredEvent" type="Object" />
+        <aura:attribute name="className" type="String" />
+        <aura:attribute name="resultHandler" type="Object"/>
+    </aura:method>       
+    
+</aura:component>
