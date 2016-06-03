@@ -1,0 +1,20 @@
+.THIS.showModal{
+    display: block !important;
+}
+.THIS.hideModal{
+    display: none !important;
+}
+.THIS .slds-modal{
+    margin-top: 60px !important;/* Needed so the top of the modal does not get cutoff by the Salesforce header bar */
+}
+.THIS .slds-notify-container{
+    position: relative !important;
+}
+.THIS .slds-modal__container{
+    width: 90%;
+    min-width: 640px;
+    max-width: 960px;
+}
+.THIS .slds-button--brand{
+    margin-left: 1rem;
+}
