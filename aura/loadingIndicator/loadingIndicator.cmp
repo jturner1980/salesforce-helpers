@@ -1,0 +1,38 @@
+<aura:component >
+    
+    <!-- Dependencies -->
+	<c:requireShared />    
+    
+    <!-- Optional attributes -->
+    <aura:attribute name="isVisible" type="Boolean" default="false" required="false"/>
+    
+    <!-- Event handlers -->
+    <aura:handler event="c:toggleScreenLoading" action="{!c.handleToggleEvent}"/> 
+
+    <div id="container" class="{!v.isVisible ? 'showSpinner' : 'hideSpinner'}">
+
+        <center>
+            
+            <div id="modal" aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                
+                <div class="slds-modal__container">
+                    
+                    <div class="slds-modal__content inherit-background">
+                        
+                        <div class="slds-spinner--medium">
+                            <img src="/resource/slds/assets/images/spinners/slds_spinner_brand.gif" alt="Loading..." />
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <div id="backdrop" class="slds-modal-backdrop slds-modal-backdrop--open"></div>
+            
+        </center>
+        
+    </div>
+        
+</aura:component>
