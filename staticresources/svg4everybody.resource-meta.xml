@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Private</cacheControl>
+    <contentType>text/javascript</contentType>
+    <description>https://github.com/jonathantneal/svg4everybody/blob/master/dist/svg4everybody.min.js 
+revision: 78c97dd
+
+Plus this pull request:  
+https://github.com/jonathantneal/svg4everybody/pull/79</description>
+</StaticResource>
