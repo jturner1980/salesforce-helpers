@@ -1,0 +1,118 @@
+<aura:component >
+	
+    <!-- Dependencies -->
+	<c:requireShared />     
+    
+    <!--Required attributes-->
+	<aura:attribute name="showModal" type="Boolean" required="true" description="Indicates if the modal should be displayed or not."/>    
+    
+    <!--Optional attributes-->
+    <aura:attribute name="title" type="String" required="false" default="" description="Title to display at the top of the modal."/>
+    <aura:attribute name="subTitle" type="String" required="false" default="" description="Message to display at the top of the modal below the title."/>
+    <aura:attribute name="spreadFooterButtons" type="Boolean" required="false" default="false" description="If set to true the footer buttons will be spread to the far left and rigt."/>
+	<aura:attribute name="showSave" type="Boolean" required="false" default="true" description="To show the save button or not."/>    
+    <aura:attribute name="showCancel" type="Boolean" required="false" default="true" description="To show the cancel button or not."/>
+    <aura:attribute name="showHeaderCloseIcon" type="Boolean" required="false" default="true" description="To show the cancel X in the header or not."/>
+    <aura:attribute name="saveButtonLabel" type="String" default="Save" description="The text to be displayed on the Save button." />
+    <aura:attribute name="cancelButtonLabel" type="String" default="Cancel" description="The text to be displayed on the Cancel button." />
+    <aura:attribute name="modalContentClass" type="String" default="" description="Additional classes to specify on the modal content div."/>
+    
+    <!--Calculated attributes-->
+    <aura:attribute name="errorMessage" type="String" required="false" default="" description="Error message to display at the top"/>
+    
+    <!-- Event registrations -->
+    <aura:registerEvent name="onModalSave" type="c:modalSave"/> 
+   	<aura:registerEvent name="onModalCancel" type="c:modalCancel"/> 
+    
+    <div id="container" class="{!(v.showModal ? 'showModal' : 'hideModal')}">
+              
+        <div aria-hidden="{!!v.showModal}" role="dialog" class="slds-modal slds-fade-in-open">
+            
+            <div class="slds-modal__container">            
+                
+                <aura:renderIf isTrue="{!v.title.length > 0 || v.subTitle.length > 0 || v.showHeaderCloseIcon}">
+                    
+                    <div class="slds-modal__header">
+                        
+                        <aura:renderIf isTrue="{!v.title.length > 0 || v.subTitle.length > 0}">
+                            
+                            <h2 class="slds-text-heading--medium">{!v.title}</h2>
+                            
+                            <p class="slds-m-top--x-small">{!v.subTitle}</p>
+                            
+                        </aura:renderIf>
+                        
+                        <aura:renderIf isTrue="{!v.showHeaderCloseIcon}">
+                            
+                            <button class="slds-button slds-button--icon-bare slds-modal__close" onclick="{!c.onCancel}">
+                                
+                                <c:svgIcon category="utility" name="close" fillColor="white" />
+                                <span class="slds-assistive-text">Close</span>           
+                                
+                            </button>
+                            
+                        </aura:renderIf>
+                        
+                        <aura:renderIf isTrue="{!v.errorMessage != ''}">
+                        
+                            <div class="slds-notify-container">
+                                      
+                                <div class="slds-notify slds-notify--toast slds-theme--error" role="alert">
+                                        
+                                    <span class="slds-assistive-text">Error</span>
+                                    
+                                    <div class="notify__content slds-grid">
+    
+                                        <c:svgIcon category="utility" name="warning" fillColor="white"/>
+                                        
+                                        <div class="slds-col slds-align-middle">
+                                            <h2 class="slds-text-heading--small slds-p-left--small">{!v.errorMessage}</h2>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            
+                            </div> 
+                            
+                        </aura:renderIf>
+                        
+                    </div>
+                    
+                </aura:renderIf>
+                
+                <div class="{!'slds-modal__content  ' + v.modalContentClass}">
+                    
+                    <div>
+                        
+                        {!v.body}
+                        
+                    </div>
+                    
+                </div>
+                
+                <aura:renderIf isTrue="{!v.showCancel || v.showSave}">
+                    
+                    <div class="{!'slds-modal__footer' + (v.spreadFooterButtons ? ' slds-modal__footer--directional' : '')}">
+                        
+                        <aura:renderIf isTrue="{!v.showCancel}">
+                            <button class="slds-button slds-button--neutral slds-x-small-button--horizontal" onclick="{!c.onCancel}">{!v.cancelButtonLabel}</button>
+                        </aura:renderIf>
+                        
+                        <aura:renderIf isTrue="{!v.showSave}">
+                            <button class="slds-button slds-button--brand slds-button--small" onclick="{!c.onSave}">{!v.saveButtonLabel}</button>
+                        </aura:renderIf>
+                        
+                    </div>
+                    
+                </aura:renderIf>
+                
+            </div>
+            
+        </div>
+        
+        <div class="slds-modal-backdrop slds-modal-backdrop--open"></div>    
+        
+    </div>
+    
+</aura:component>
