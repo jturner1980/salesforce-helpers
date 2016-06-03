@@ -1,0 +1,15 @@
+.THIS{
+    height: 0px !important;
+}
+.THIS.showSpinner{
+    display: block !important;
+}
+.THIS.hideSpinner{
+    display: none !important;
+}
+.THIS .inherit-background{
+    background-color: transparent !important;
+}
+.THIS #backdrop{
+    opacity: 0.6 !important;
+}
