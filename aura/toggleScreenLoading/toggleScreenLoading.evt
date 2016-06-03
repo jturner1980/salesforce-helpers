@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Display or hide the screenLoading component.">
+    <aura:attribute name="isVisible" type="Boolean" default="true" required="false"/>
+</aura:event>
