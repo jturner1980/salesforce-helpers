@@ -1,0 +1,94 @@
+<apex:page controller="contactRemoter" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+  
+<html>  
+  	<style>
+  		a:hover {cursor:pointer;}
+		@-moz-document url-prefix() {
+		  fieldset { display: table-cell; }
+		}  	
+		.glyphicon {
+		    font-size: 20px;
+		    vertical-align: middle;
+		}				
+		.glyphicon-arrow-up, .glyphicon-arrow-down{
+		    font-size: 15px;
+		}	
+  	</style>
+  
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"/>
+	<apex:includeScript value="{!URLFOR($Resource.AngularUtils, 'js/ContactDirectory.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.AngularUtils, 'js/Paginator.js')}"/>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  	
+  	<div ng-app="MyApp">   	   		
+   
+  		<div ng-controller="myController">
+    		
+    		<div class="container">  
+				
+				<h1 class="text-center">Contact Directory</h1><br/><br/><br/>
+				
+				<form class="navbar-form navbar-left" style="padding-left:0px !important;" role="search">
+			    	<input type="text" ng-model="searchTxt" class="form-control" placeholder="Search" ng-enter="onSearch();"></input>
+       				<a href="#" ng-click="onSearch();">
+		         		<span class="glyphicon glyphicon-search"></span>
+		        	</a>
+       				<a href="#" ng-click="onClearSearch();">
+		         		<span class="glyphicon glyphicon-remove"></span>
+		        	</a>		        	
+				</form>				
+				
+			    <div class="table-responsive">          
+			    	
+			    	<table class="table table-striped">
+			        
+			        	<thead>
+		          			<tr>
+		          				<th>Actions</th>
+					            <th><a ng-click="toggleSort('Name');">Name</a><span ng-show="orderBy == 'Name'" ng-class="orderAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down'"></span></th>
+					            <th><a ng-click="toggleSort('Account.Name');">Account</a><span ng-show="orderBy == 'Account.Name'" ng-class="orderAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down'"></span></th>
+					            <th><a ng-click="toggleSort('Phone');">Phone</a><span ng-show="orderBy == 'Phone'" ng-class="orderAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down'"></span></th>
+					            <th><a ng-click="toggleSort('Birthdate');">Birthdate</a><span ng-show="orderBy == 'Birthdate'" ng-class="orderAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down'"></span></th>         
+				        	</tr>
+				        </thead>
+			        
+			        	<tbody>
+				        	<tr ng-repeat="c in contacts">
+				          		<td><a ng-click="deleteContact(c.Id, $index);">Delete</a></td>
+					          	<td><apex:outputLink value="{!URLFOR('/{{c.Id}}')}" target="_blank">{{c.Name}}</apex:outputLink></td>
+					          	<td><apex:outputLink value="{!URLFOR('/{{c.AccountId}}')}" target="_blank">{{c.Account.Name}}</apex:outputLink></td>
+					            <td>{{c.Phone}}</td>
+					            <td>{{c.Birthdate | date:'MM/dd/yyyy'}}</td>
+				        	</tr>   
+				        					        	             
+			        	</tbody>
+			        	
+					</table>
+			      
+			      	<br/>
+
+					<c:Paginator refreshFunction="getContacts"/>	   		      	
+	
+				</div>
+				    
+			</div>
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	   	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  		</div>
+  
+	</div>
+	
+	<apex:remoteObjects >
+		<apex:remoteObjectModel name="Contact" jsShorthand="CT" fields="Name,Id">
+	    </apex:remoteObjectModel>
+	</apex:remoteObjects>
+	
+	<script>
+		contactDirectory.getContactsInitStr = '{!$RemoteAction.contactRemoter.getContactsInit}';
+	</script>
+
+</html>
+	  
+</apex:page>
