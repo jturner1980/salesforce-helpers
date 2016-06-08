@@ -1,0 +1,23 @@
+<apex:component>
+	
+	<apex:attribute name="refreshFunction" type="String" required="true" description="The javascript function name to call when a refresh is needed."/>
+	  		
+	<nav class="text-center">
+	  <ul class="pagination">
+	    <li ng-class="{disabled : pagination.offSet == 0}">
+	      <a href="#" ng-click="pagination.previous();{!refreshFunction}();" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <li ng-repeat="pg in pagination.pages" ng-class="{active : pagination.currentPage == pg}">
+	    	<a href="#" ng-click="pagination.goToPage(pg);{!refreshFunction}();">{{pg}}</a>
+    	</li>					    
+	    <li ng-class="{disabled : pagination.currentPage == pagination.totalPages}">
+	      <a href="#" ng-click="pagination.next();{!refreshFunction}();" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>	
+		
+</apex:component>
