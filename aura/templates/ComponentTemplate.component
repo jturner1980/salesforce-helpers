@@ -1,0 +1,23 @@
+<aura:component >
+	
+    <!-- Dependencies -->
+    <c:requiredComponent />     
+    
+    <!--Required attributes-->
+    <aura:attribute name="attr0" type="String" required="true" default="" description=""/>    
+    
+    <!--Optional attributes-->
+    <aura:attribute name="attr1" type="String" required="false" default="" description=""/>
+    
+    <!--Calculated attributes-->
+    <aura:attribute name="attr2" type="Integer" required="false" default="0" description=""/>
+    
+    <!-- Event registrations -->
+    <aura:registerEvent name="onEventName" type="c:componentEventName"/> 
+
+    <!--Event handlers-->
+    <aura:handler name="change" value="{!v.attr0}" action="{!c.handleAttr0Change}"/>
+
+    <!--Component markup-->
+    
+</aura:component>
