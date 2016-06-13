@@ -23,7 +23,7 @@ public with sharing class contactRemoter {
     
     private static Contact[] getContacts(String searchTxt, Integer pageSize, Integer offSet, String sortBy, String sortDir){
     	
-    	String selectClause = 'Select Id, Name, Account.Name, Phone, Birthdate From Contact ';
+    	String selectClause = 'Select Id, Name, Account.Name, Account.Geolocation__latitude__s, Account.Geolocation__longitude__s, Phone, Birthdate From Contact ';
     	
     	if (String.isNotBlank(searchTxt)){
     		return Database.query(selectClause + 'Where Name Like \'%' + String.escapeSingleQuotes(searchTxt) + '%\' Order By ' + String.escapeSingleQuotes(sortBy) + ' ' + String.escapeSingleQuotes(sortDir) + ' LIMIT :pageSize');    		
